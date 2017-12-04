@@ -1,0 +1,25 @@
+{
+  "name": "dev-tools",
+  "version": "1.0.0",
+  "description": "Weebly Platform Developer Tools",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "preferGlobal": true,
+  "bin": {
+    "weebly": "./index.js"
+  },
+  "keywords": [
+    "weebly",
+    "developer",
+    "helper"
+  ],
+  "author": "Daniel Lett",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^2.3.0",
+    "commander": "^2.12.2",
+    "inquirer": "^4.0.1"
+  }
+}
