@@ -5,7 +5,7 @@ const settingsQuestions = [
         type: 'input',
         name: 'name',
         message: 'What is the name (to be used in code) for this setting?',
-        validate: () => {} // todo: alphanumeric
+        validate: () => true // todo: alphanumeric
     },
     {
         type: 'input',
@@ -33,28 +33,28 @@ const settingsQuestions = [
         name: 'min',
         message: 'Enter the minimum number of characters',
         when: (answers) => ['string', 'text'].indexOf(answers.type) >= 0,
-        validate: () => {} // todo: numeric or null
+        validate: () => true // todo: numeric or null
     },
     {
         type: 'input',
         name: 'max',
         message: 'Enter the maximum number of characters',
         when: (answers) => ['string', 'text'].indexOf(answers.type) >= 0,
-        validate: () => {} // todo: numeric or null
+        validate: () => true // todo: numeric or null
     },
     {
         type: 'input',
         name: 'min',
         message: 'Enter the minimum value',
         when: (answers) => ['int', 'slider'].indexOf(answers.type) >= 0,
-        validate: () => {} // todo: numeric or null
+        validate: () => true // todo: numeric or null
     },
     {
         type: 'input',
         name: 'max',
         message: 'Enter the maximum value',
         when: (answers) => ['int', 'slider'].indexOf(answers.type) >= 0,
-        validate: () => {} // todo: numeric or null
+        validate: () => true // todo: numeric or null
     },
     {
         type: 'list',
@@ -68,7 +68,7 @@ const settingsQuestions = [
         name: 'step',
         message: 'Enter the step increment',
         when: (answers) => answers.display_step_button === 'Yes',
-        validate: (value) => {} // todo: integer
+        validate: (value) => true // todo: integer
     },
     {
         type: 'input',
@@ -78,7 +78,8 @@ const settingsQuestions = [
     {
         type: 'list',
         name: 'another_setting',
-        message: 'Do you want to add another setting to this group?'
+        message: 'Do you want to add another setting to this group?',
+        choices: ['Yes', 'No']
     }
 ];
 
@@ -103,7 +104,7 @@ const groupQuestions = [
     }
 ];
 
-module.exports = (answers) => {
+module.exports = async function (answers) {
     if (answers.has_element === 'No') {
         return [];
     }
@@ -118,7 +119,7 @@ module.exports = (answers) => {
 
         groups[currentGroup].settings.push(settingAnswers);
         
-        if (settingsAnswers.another_setting === 'No') {
+        if (settingAnswers.another_setting === 'No') {
             let groupAnswers = await prompt(groupQuestions);
 
             if (groupAnswers.another_group === 'Yes') {

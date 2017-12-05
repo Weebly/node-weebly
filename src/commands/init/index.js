@@ -11,20 +11,32 @@ module.exports = {
         program
             .command('init')
             .description('Initialize a Weebly application.')
-            .action(() => {
-                let initialAnswers = initialPrompt();
-                let settingsAnswers = settingsPrompt(answers);
-                let externalSettings = externalSettingsPrompt();
-                let tutorialAnswers = tutorialPrompt();
-                let dashboardCardAnswers = dashboardCardPrompt();
+            .action(async function () {
+                
+                initialPrompt().then(initialAnswers => {
+                    settingsPrompt(initialAnswers).then(settingsAnswers => {
+                        externalSettingsPrompt().then(externalSettings => {
+                            tutorialPrompt().then(tutorialAnswers => {
+                                dashboardCardPrompt().then(dashboardCardAnswers => {
 
-                manifestModel.build(
-                    initialAnswers,
-                    settingsAnswers,
-                    externalSettings,
-                    tutorialAnswers,
-                    dashboardCardAnswers
-                );
+                                    manifestModel.build(
+                                        initialAnswers,
+                                        settingsAnswers,
+                                        externalSettings,
+                                        tutorialAnswers,
+                                        dashboardCardAnswers
+                                    );
+
+                                })
+                            })
+                        })
+                    })
+                });
+
+                // let settingsAnswers = settingsPrompt(initialAnswers);
+                // let externalSettings = externalSettingsPrompt();
+                // let tutorialAnswers = tutorialPrompt();
+                // let dashboardCardAnswers = dashboardCardPrompt();
     
                 // tell user of the great success.
             });

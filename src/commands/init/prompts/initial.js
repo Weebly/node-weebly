@@ -1,5 +1,5 @@
 const { prompt } = require('inquirer');
-const urlValidator = require('../../utils/validators/url-validator');
+const urlValidator = require('../../../utils/validators/url-validator');
 
 const questions = [
     {
@@ -132,7 +132,7 @@ const questions = [
         name: 'element_version',
         message: 'What is the element\'s version? The version of an element has to be equal to or less than the app\'s version.',
         when: (answers) => answers.has_element === 'Yes',
-        validate: () => {} // TODO: Semver validation. 
+        validate: () => {return true;} // TODO: Semver validation. 
     },
     {
         type: 'list',
@@ -150,6 +150,6 @@ const questions = [
     }
 ];
 
-module.exports = () => {
-        return await prompt(questions);
+module.exports = function () {
+    return prompt(questions);
 }
