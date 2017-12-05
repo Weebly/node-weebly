@@ -1,6 +1,6 @@
-import _ from 'lodash';
-import path from 'path';
-import fs from 'fs';
+const _ = require('lodash');
+const fs = require('fs');
+const jsonfile = require('jsonfile');
 
 let base = {
     manifest: 1,
@@ -20,20 +20,25 @@ let base = {
 module.exports = {
     data: {},
     fromFile() {
-        //
+        this.data = jsonfile.readFileSync('manifest.json');
     },
-    toFile() {
-        //
+    async toFile() {
+       await jsonfile.writeFileSync('manifest.json', this.data, {spaces: 2});
     },
-    createSnippetTemplate() {
-        //
+    async createSnippetTemplate() {
+        await fs.mkdirSync('files');
+        await fs.mkdirSync('files/html');
+        await fs.writeFileSync('files/html/snippet.tpl', '');
     },
-    initialize(projectName) {
-        // create folder from app name.
-        // create manifest.json file within.
+    async initialize(projectName) {
+        await fs.mkdirSync(projectName);
+
+        let dirname = `${process.cwd()}/${projectName}`;
+
+        process.chdir(dirname);
     },
-    build(values) {
-        _.merge(data, _.pick(values, [
+    async build(values) {
+        _.merge(this.data, _.pick(values, [
             'client_id', 
             'version', 
             'manage_app_url', 
@@ -44,11 +49,11 @@ module.exports = {
         if (values.oauth_final_destination === 'dashboard_card') {
             values.oauth_final_destination += values.oauth_destination_card_name;
         }
-        data.oauth_final_destination = values.oauth_final_destination;
+        this.data.oauth_final_destination = values.oauth_final_destination;
 
-        if (values.is_snippet) {
-            data.snippet = "files/html/shippet.tpl";
-            this.createSnippetTemplate();
+        if (values.is_snippet === 'Yes') {
+            this.data.snippet = "files/html/shippet.tpl";
+            await this.createSnippetTemplate();
         }
     },
 

@@ -86,7 +86,7 @@ const questions = [
         type: 'input',
         name: 'oauth_destination_card_name',
         message: 'What is the name of the dashboard card?',
-        when: (answers) => answers.oauth_final_destination === 'dashboard-card'
+        when: (answers) => answers.oauth_final_destination === 'dashboard_card'
     },
     {
         type: 'list',

@@ -11,9 +11,11 @@ module.exports = {
             .action(async function () {
                 let answers = await initialPrompt();
 
-                manifestModel.initialize(answers.name);
+                await manifestModel.initialize(answers.name);
 
-                manifestModel.build(answers);
+                await manifestModel.build(answers);
+                
+                await manifestModel.toFile();
 
                 console.log(chalk`
     Your app has successfully been created!

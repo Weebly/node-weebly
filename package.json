@@ -21,6 +21,7 @@
     "chalk": "^2.3.0",
     "commander": "^2.12.2",
     "inquirer": "^4.0.1",
+    "jsonfile": "^4.0.0",
     "lodash": "^4.17.4"
   }
 }
