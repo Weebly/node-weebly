@@ -1,10 +1,7 @@
-const manifestModel = require('./manifest-model');
+const chalk = require('chalk');
 
+const manifestModel = require('../../models/manifest');
 const initialPrompt = require('./prompts/initial');
-const settingsPrompt = require('./prompts/settings');
-const externalSettingsPrompt = require('./prompts/external-settings');
-const tutorialPrompt = require('./prompts/tutorial');
-const dashboardCardPrompt = require('./prompts/dashboard-card');
 
 module.exports = {
     command(program) {
@@ -12,33 +9,20 @@ module.exports = {
             .command('init')
             .description('Initialize a Weebly application.')
             .action(async function () {
-                
-                initialPrompt().then(initialAnswers => {
-                    settingsPrompt(initialAnswers).then(settingsAnswers => {
-                        externalSettingsPrompt().then(externalSettings => {
-                            tutorialPrompt().then(tutorialAnswers => {
-                                dashboardCardPrompt().then(dashboardCardAnswers => {
+                let answers = await initialPrompt();
 
-                                    manifestModel.build(
-                                        initialAnswers,
-                                        settingsAnswers,
-                                        externalSettings,
-                                        tutorialAnswers,
-                                        dashboardCardAnswers
-                                    );
+                manifestModel.initialize(answers.name);
 
-                                })
-                            })
-                        })
-                    })
-                });
+                manifestModel.build(answers);
 
-                // let settingsAnswers = settingsPrompt(initialAnswers);
-                // let externalSettings = externalSettingsPrompt();
-                // let tutorialAnswers = tutorialPrompt();
-                // let dashboardCardAnswers = dashboardCardPrompt();
-    
-                // tell user of the great success.
+                console.log(chalk`
+    Your app has successfully been created!
+
+    Check out these other commands to continue:
+
+    {blue.bold weebly add element}
+    {blue.bold weebly add dashboard-card}
+              `);
             });
     }
 };
