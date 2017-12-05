@@ -1,5 +1,4 @@
 const program = require('commander');
-const { prompt } = require('inquirer');
 
 /**
  * Commands that the app will allow you to run.
@@ -16,6 +15,6 @@ program
 /**
  * Add the available commands to the program.
  */
-initCommand.command(program, prompt);
+initCommand.command(program);
 
 program.parse(process.argv);

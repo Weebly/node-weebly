@@ -4,6 +4,7 @@ const writer = require('../writer');
  * Validates the given parameter is a valid URL.
  * 
  * @param {string} value 
+ * @param {bool} enforceHttps
  */
 module.exports = (value, enforceHttps) => {
     if (enforceHttps) {
