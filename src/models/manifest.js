@@ -47,12 +47,12 @@ module.exports = {
         ]));
 
         if (values.oauth_final_destination === 'dashboard_card') {
-            values.oauth_final_destination += values.oauth_destination_card_name;
+            values.oauth_final_destination += '-' + values.oauth_destination_card_name;
         }
         this.data.oauth_final_destination = values.oauth_final_destination;
 
         if (values.is_snippet === 'Yes') {
-            this.data.snippet = "files/html/shippet.tpl";
+            this.data.snippet = "files/html/snippet.tpl";
             await this.createSnippetTemplate();
         }
     },
