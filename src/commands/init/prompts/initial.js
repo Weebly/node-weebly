@@ -1,5 +1,7 @@
 const { prompt } = require('inquirer');
 const urlValidator = require('../../../utils/validators/url-validator');
+const clientIdValidator = require('../../../utils/validators/clientId-validator');
+const semverValidator = require('../../../utils/validators/semver-validator');
 const writer = require('../../../utils/writer');
 
 const questions = [
@@ -11,12 +13,14 @@ const questions = [
     {
         type : 'input',
         name : 'client_id',
-        message : 'Enter your client ID. You find this on your app\'s Admin page.'
+        message : 'Enter your client ID. You find this on your app\'s Admin page.',
+        validate: (value) => clientIdValidator(value)
     },
     {
         type: 'input',
         name: 'version',
-        message: 'Enter the version of this app.'
+        message: 'Enter the version of this app.',
+        validate: (value) => semverValidator(value)
     },
     {
         type: 'list',
@@ -29,9 +33,7 @@ const questions = [
         name: 'manage_app_url',
         message: 'Enter the URL for the page where users can manage the app',
         when: (answers) => answers.has_external_site === 'Yes',
-        validate: (value) => {
-            return urlValidator(value, true);
-        }
+        validate: (value) => urlValidator(value, true)
     },
     {
         type: 'list',
@@ -55,20 +57,14 @@ const questions = [
             'read:membership',
             'write:membership'
         ],
-        when: (answers) => {
-            return answers.has_oauth === 'Yes';
-        }
+        when: answers => answers.has_oauth === 'Yes'
     },
     {
         type: 'input',
         name: 'callback_url',
         message: 'What is the callback URL? This is where Weebly will send responses to.',
-        when: (answers) => {
-            return answers.has_oauth === 'Yes';
-        },
-        validate: (value) => {
-            return urlValidator(value, true);
-        }
+        when: answers => answers.has_oauth === 'Yes',
+        validate: value => urlValidator(value, true)
     },
     {
         type: 'list',
@@ -80,13 +76,13 @@ const questions = [
             {name: 'Manage Page', value: 'manage'},
             {name: 'Dashboard Card', value: 'dashboard_card'}
         ],
-        when: (answers) => answers.has_oauth === 'Yes'
+        when: answers => answers.has_oauth === 'Yes'
     },
     {
         type: 'input',
         name: 'oauth_destination_card_name',
         message: 'What is the name of the dashboard card?',
-        when: (answers) => answers.oauth_final_destination === 'dashboard_card'
+        when: answers => answers.oauth_final_destination === 'dashboard_card'
     },
     {
         type: 'list',

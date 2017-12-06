@@ -5,18 +5,22 @@ const writer = require('../../../utils/writer');
 const settingsQuestions = require('./element/settings');
 const externalSettingsQuestions = require('./element/external-settings');
 const tutorialQuestions = require('./element/tutorial');
+const iconValidator = require('../../../utils/validators/componentIcon-validator');
+const semverValidator = require('../../../utils/validators/semver-validator');
+const nameValidator = require('../../../utils/validators/componentName-validator');
 
 const questions = [
     {
         type: 'input',
         name: 'element_name',
-        message: 'What is the element\'s name?'
+        message: 'What is the element\'s name?',
+        validate: value => nameValidator(value)
     },
     {
         type: 'input',
         name: 'element_version',
         message: 'What is the element\'s version? The version of an element has to be equal to or less than the app\'s version.',
-        validate: () => true // TODO: Semver validation. 
+        validate: value => semverValidator(value)
     },
     {
         type: 'list',
@@ -36,7 +40,7 @@ const questions = [
         name: 'icon_path',
         message: 'Enter a path to a local directory where the icon is stored',
         when: (answers) => answers.has_element_icon === 'Yes',
-        validate: (value) => true // TODO: validate file exists.
+        validate: value => iconValidator(value)
     },
     {
         type: 'list',
