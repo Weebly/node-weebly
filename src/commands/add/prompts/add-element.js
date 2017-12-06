@@ -1,4 +1,6 @@
 const { prompt } = require('inquirer');
+const _ = require('lodash');
+const writer = require('../../../utils/writer');
 
 const settingsQuestions = require('./element/settings');
 const externalSettingsQuestions = require('./element/external-settings');
@@ -70,10 +72,9 @@ module.exports = async (manifestModel) => {
     let externalSettings = await externalSettingsQuestions();
     let tutorial = await tutorialQuestions();
 
-    // console.log(answers, settings, externalSettings, tutorial);
-
+    let iconPath;
     if (answers.has_element_icon === 'Yes') {
-        // answers.icon_path needs to be copied into the project directory.
+        iconPath = answers.icon_path;
     }
 
     let values = {
@@ -97,9 +98,15 @@ module.exports = async (manifestModel) => {
         }
     }
 
-    console.log(values);
+    if (tutorial.has_tutorial === 'Yes') {
+        values.tutorial = _.omit(tutorial, ['has_tutorial']);
+    }
 
-    manifestModel.addElement(values);
+    try {
+        await manifestModel.addElement(values, iconPath);
 
-    manifestModel.toFile();
+        manifestModel.toFile();
+    } catch (e) {
+        writer.error(e);
+    }
 }

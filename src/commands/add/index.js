@@ -11,7 +11,11 @@ module.exports = {
             .command('add <type>')
             .description('Add an element, dashboard-card or webhook to the manifest.')
             .action(async (type) => {
-                await manifestModel.fromFile();
+                try {
+                    await manifestModel.fromFile();
+                } catch (e) {
+                    return writer.error(e);
+                }
 
                 switch (type) {
                     case 'element':

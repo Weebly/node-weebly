@@ -73,9 +73,9 @@ const settingsQuestions = [
     },
     {
         type: 'input',
-        name: 'radio_options',
+        name: 'values',
         message: 'Enter a name for each selection, separated by commas',
-        when: (answers) => answers.type === 'radio'
+        when: (answers) => ['radio', 'select'].indexOf(answers.type) >= 0
     },
     {
         type: 'list',
@@ -115,6 +115,11 @@ module.exports = async function () {
     while (creatingSettings) {
         let settingAnswers = await prompt(settingsQuestions);
         let settings = _.omit(settingAnswers, ['another_setting']);
+        if (_.isString(settings.values)) {
+            settings.values = _.map(settings.values.split(','), (value) => {
+                return value.trim();
+            });
+        }
         // todo: make sure all input types work.
         groups[currentGroup].properties.push(settings);
         

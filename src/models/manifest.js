@@ -2,29 +2,13 @@ const _ = require('lodash');
 const fs = require('fs');
 const jsonfile = require('jsonfile');
 
-let base = {
-    manifest: 1,
-    client_id: null,
-    version: null,
-    manage_app_url: null,
-    scopes: [],
-    callback_url: null,
-    oauth_final_destination: null,
-    webhooks: {
-        callback_url: null,
-        events: []
-    },
-    snippet: null
-};
-
 module.exports = {
     data: {},
     async fromFile() {
         try {
             this.data = await jsonfile.readFileSync('manifest.json');
         } catch (e) {
-            // TODO: Handle file not existing.
-            console.log(e);
+            throw 'ERROR: Could not read manifest.json';
         }
     },
     async toFile() {
@@ -62,10 +46,36 @@ module.exports = {
         }
     },
 
-    addElement(values) {
+    async createElementDirectory(directory) {
+        let filesDirectoryExists = await fs.existsSync('files');
+        if (!filesDirectoryExists) {
+            await fs.mkdirSync('files');
+        }
+
+        let elementDirectoryExists = await fs.existsSync(directory);
+        if (!elementDirectoryExists) {
+            await fs.mkdirSync(directory);
+        }
+    },
+    async moveIcon(iconPath, directory) {
+        if (!iconPath.endsWith('.svg')) {
+            throw 'ERROR: Icon must be an SVG.';
+        }
+
+        let iconExists = await fs.existsSync(iconPath);
+        if (!iconExists) {
+            throw 'ERROR: Icon does not exist at the given path.';
+        }
+
+        await fs.copyFileSync(iconPath, directory + '/icon.svg');
+    },
+    async addElement(values, iconPath) {
         if (!_.isArray(this.data.elements)) {
             this.data.elements = [];
         }
+
+        await this.createElementDirectory(values.path);
+        await this.moveIcon(iconPath, values.path);
 
         this.data.elements.push(values);
     }
