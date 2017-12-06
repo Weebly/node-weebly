@@ -1,12 +1,14 @@
 const { prompt } = require('inquirer');
 const _ = require('lodash');
+const nameValidator = require('../../../../utils/validators/componentName-validator');
+const intValidator = require('../../../../utils/validators/integer-validator');
 
 const settingsQuestions = [
     {
         type: 'input',
         name: 'name',
         message: 'What is the name (to be used in code) for this setting?',
-        validate: () => true // todo: alphanumeric
+        validate: value => nameValidator(value)
     },
     {
         type: 'input',
@@ -34,28 +36,28 @@ const settingsQuestions = [
         name: 'min',
         message: 'Enter the minimum number of characters',
         when: (answers) => ['string', 'text'].indexOf(answers.type) >= 0,
-        validate: () => true // todo: numeric or null
+        validate: value => intValidator(value)
     },
     {
         type: 'input',
         name: 'max',
         message: 'Enter the maximum number of characters',
         when: (answers) => ['string', 'text'].indexOf(answers.type) >= 0,
-        validate: () => true // todo: numeric or null
+        validate: value => intValidator(value)
     },
     {
         type: 'input',
         name: 'min',
         message: 'Enter the minimum value',
         when: (answers) => ['int', 'slider'].indexOf(answers.type) >= 0,
-        validate: () => true // todo: numeric or null
+        validate: value => intValidator(value)
     },
     {
         type: 'input',
         name: 'max',
         message: 'Enter the maximum value',
         when: (answers) => ['int', 'slider'].indexOf(answers.type) >= 0,
-        validate: () => true // todo: numeric or null
+        validate: value => intValidator(value)
     },
     {
         type: 'list',
@@ -69,7 +71,7 @@ const settingsQuestions = [
         name: 'step',
         message: 'Enter the step increment',
         when: (answers) => answers.display_step_button === 'Yes',
-        validate: (value) => true // todo: integer
+        validate: value => intValidator(value)
     },
     {
         type: 'input',

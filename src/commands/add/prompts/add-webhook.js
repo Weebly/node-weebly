@@ -1,10 +1,12 @@
 const { prompt } = require('inquirer');
+const urlValidator = require('../../../utils/validators/url-validator');
 
 const questions = [
     {
         type: 'input',
         name: 'callback_url',
-        message: 'What is the callback_url for webhooks. This URL will receive webhook payloads.'
+        message: 'What is the callback_url for webhooks. This URL will receive webhook payloads.',
+        validate: value = urlValidator(value)
     },
     {
         type: 'checkbox',

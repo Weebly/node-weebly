@@ -41,7 +41,6 @@ const questions = [
         when: answers => answers.type === 'video',
         validator: () => true // todo: validate youtube video ID
     },
-    
 ];
 
 const topicQuestions = [

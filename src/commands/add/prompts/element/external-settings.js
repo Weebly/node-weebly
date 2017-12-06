@@ -1,5 +1,6 @@
 const { prompt } = require('inquirer');
 const urlValidator = require('../../../../utils/validators/url-validator');
+const intValidator = require('../../../../utils/validators/integer-validator');
 
 const questions = [
     {
@@ -25,13 +26,15 @@ const questions = [
         type: 'input',
         name: 'height',
         message: 'Enter the height for the iframe (in pixels)',
-        when: answers => answers.create_external_setting === 'Yes'
+        when: answers => answers.create_external_setting === 'Yes',
+        validate: value => intValidator(value)
     },
     {
         type: 'input',
         name: 'width',
         message: 'Enter the width for the iframe (in pixels)',
-        when: answers => answers.create_external_setting === 'Yes'
+        when: answers => answers.create_external_setting === 'Yes',
+        validate: value => intValidator(value)
     },
     {
         type: 'list',
