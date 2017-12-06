@@ -1,5 +1,5 @@
 {
-  "name": "dev-tools",
+  "name": "node-weebly",
   "version": "1.0.0",
   "description": "Weebly Platform Developer Tools",
   "main": "index.js",
@@ -15,7 +15,7 @@
     "developer",
     "helper"
   ],
-  "author": "Daniel Lett",
+  "author": "Weebly Inc.",
   "license": "ISC",
   "dependencies": {
     "chalk": "^2.3.0",
