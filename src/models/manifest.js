@@ -99,6 +99,9 @@ module.exports = {
     findElement(name) {
         return _.find(this.data.elements, (element) => element.name === name);
     },
+    findDashboardCard(name) {
+        return _.find(this.data.dashboard_cards, (card) => card.name === name);
+    },
 
     deleteElement(name) {
         let newElements = _.reject(this.data.elements, (element) => element.name === name);
@@ -110,5 +113,16 @@ module.exports = {
         }
 
         throw 'ERROR: No elements found with that name.';
+    },
+    deleteDashboardCard(name) {
+        let newCards = _.reject(this.data.dashboard_cards, (card) => card.name === name);
+
+        if (_.size(newCards) < _.size(this.data.dashboard_cards)) {
+            this.data.dashboard_cards = newCards;
+            this.toFile();
+            return true;
+        }
+
+        throw 'ERROR: No dashboard cards found with that name.';
     }
 }

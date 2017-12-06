@@ -12,6 +12,10 @@ function listElements(manifest) {
 
 function listDashboardCards(manifest) {
     let dashboardCards = manifest.getDashboardCards();
+    writer.default('Dashboard cards:', true);
+    _.each(dashboardCards, card => {
+        writer.default(card.name);
+    });
 }
 
 function listWebhooks(manifest) {

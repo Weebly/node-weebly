@@ -25,7 +25,19 @@ async function deleteElement(manifest, name) {
 
 function deleteDashboardCard(manifest, name) {
     try {
-        manifest.deleteDashboardCard(name);
+        if (!manifest.findDashboardCard(name)) {
+            return writer.error(`ERROR: Could not find dashboard card with name ${name}.`);
+        }
+
+        let confirmed = await prompt([{
+            type: 'confirm',
+            name: 'confirmed',
+            message: `Are you sure you want to delete the dashboard card ${name}? This action is irreversible.`
+        }]);
+
+        if (confirmed.confirmed) {
+            manifest.deleteDashboardCard(name);            
+        }
     } catch (e) {
         writer.error(e);
     }
@@ -35,7 +47,7 @@ module.exports = {
     command(program) {
         program
             .command('delete <type> <name>')
-            .description('List the contents of the manifest.')
+            .description('Delete an item from the manifest.')
             .action(async (type, name) => {
                 try {
                     await manifestModel.fromFile();
