@@ -3,7 +3,7 @@ const { prompt } = require('inquirer');
 const questions = [
     {
         type: 'input',
-        name: 'webhook_callback_url',
+        name: 'callback_url',
         message: 'What is the callback_url for webhooks. This URL will receive webhook payloads.'
     },
     {
@@ -22,6 +22,10 @@ const questions = [
     },
 ];
 
-module.exports = async () => {
+module.exports = async (manifestModel) => {
     let answers = await prompt(questions);
+
+    manifestModel.setWebhooks(answers);
+
+    manifestModel.toFile();
 }

@@ -78,5 +78,8 @@ module.exports = {
         await this.moveIcon(iconPath, values.path);
 
         this.data.elements.push(values);
+    },
+    setWebhooks(values) {
+        this.data.webhooks = values;
     }
 }
