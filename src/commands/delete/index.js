@@ -23,7 +23,7 @@ async function deleteElement(manifest, name) {
     }
 }
 
-function deleteDashboardCard(manifest, name) {
+async function deleteDashboardCard(manifest, name) {
     try {
         if (!manifest.findDashboardCard(name)) {
             return writer.error(`ERROR: Could not find dashboard card with name ${name}.`);
