@@ -75,11 +75,40 @@ module.exports = {
         }
 
         await this.createElementDirectory(values.path);
-        await this.moveIcon(iconPath, values.path);
+        if (_.isString(iconPath)) {
+            await this.moveIcon(iconPath, values.path);
+        }
 
         this.data.elements.push(values);
     },
     setWebhooks(values) {
         this.data.webhooks = values;
+    },
+
+
+    getElements() {
+        return this.data.elements;
+    },
+    getWebhooks() {
+        return this.data.webhooks;
+    },
+    getDashboardCards() {
+        return this.data.dashboard_cards;
+    },
+
+    findElement(name) {
+        return _.find(this.data.elements, (element) => element.name === name);
+    },
+
+    deleteElement(name) {
+        let newElements = _.reject(this.data.elements, (element) => element.name === name);
+
+        if (_.size(newElements) < _.size(this.data.elements)) {
+            this.data.elements = newElements;
+            this.toFile();
+            return true;
+        }
+
+        throw 'ERROR: No elements found with that name.';
     }
 }
