@@ -19,8 +19,13 @@ let base = {
 
 module.exports = {
     data: {},
-    fromFile() {
-        this.data = jsonfile.readFileSync('manifest.json');
+    async fromFile() {
+        try {
+            this.data = await jsonfile.readFileSync('manifest.json');
+        } catch (e) {
+            // TODO: Handle file not existing.
+            console.log(e);
+        }
     },
     async toFile() {
        await jsonfile.writeFileSync('manifest.json', this.data, {spaces: 2});
@@ -57,7 +62,11 @@ module.exports = {
         }
     },
 
-    addElement() {
-        //
+    addElement(values) {
+        if (!_.isArray(this.data.elements)) {
+            this.data.elements = [];
+        }
+
+        this.data.elements.push(values);
     }
 }

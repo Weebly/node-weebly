@@ -1,4 +1,5 @@
 const { prompt } = require('inquirer');
+const _ = require('lodash');
 
 const settingsQuestions = [
     {
@@ -74,6 +75,7 @@ const settingsQuestions = [
         type: 'input',
         name: 'radio_options',
         message: 'Enter a name for each selection, separated by commas',
+        when: (answers) => answers.type === 'radio'
     },
     {
         type: 'list',
@@ -104,26 +106,23 @@ const groupQuestions = [
     }
 ];
 
-module.exports = async function (answers) {
-    if (answers.has_element === 'No') {
-        return [];
-    }
-
+module.exports = async function () {
     let creatingSettings = true;
     let groups = [];
-    groups.push({name: 'settings', label: 'Settings', settings: []});
+    groups.push({type: 'group', name: 'settings', label: 'Settings', properties: []});
     let currentGroup = 0;
 
     while (creatingSettings) {
         let settingAnswers = await prompt(settingsQuestions);
-
-        groups[currentGroup].settings.push(settingAnswers);
+        let settings = _.omit(settingAnswers, ['another_setting']);
+        // todo: make sure all input types work.
+        groups[currentGroup].properties.push(settings);
         
         if (settingAnswers.another_setting === 'No') {
             let groupAnswers = await prompt(groupQuestions);
 
             if (groupAnswers.another_group === 'Yes') {
-                groups.push({name: groupAnswers.name, label: groupAnswers.label, settings: []});
+                groups.push({type: 'group', name: groupAnswers.name, label: groupAnswers.label, properties: []});
                 currentGroup++;
             } else {
                 creatingSettings = false;

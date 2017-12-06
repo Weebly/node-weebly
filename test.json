@@ -1,0 +1,49 @@
+"elements": [
+	{
+	  "path": "files",
+	  "name": "Example Element",
+	  "version": "1.0.1",
+	  "settings": {
+		"config": {
+		  "external": {
+			  "url": "https://example.com/:jwt"
+			  "label": "Edit Your External Settings",
+			  "height":800,
+			  "width":1024,
+              "modal": true,
+              "fullscreen": true
+		  },
+		  "autopop": false
+		},
+		"properties": [
+          {
+            "type": "group",
+            "name": "settings",
+            "label": "Settings",
+            "properties": [
+              {
+                "name": "height",
+                "label": "Height",
+                "default": "medium",
+                "type": "select",
+                "values": [
+                  "small",
+                  "medium",
+                  "large"
+                ]
+              },
+              {
+                "name": "zoom",
+                "label": "Zoom",
+                "default": 5,
+                "type": "slider",
+                "step": 1,
+                "min": 0,
+                "max": 10
+              },
+             ]
+          }
+        ]
+      }
+    }
+  ]

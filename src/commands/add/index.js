@@ -1,4 +1,5 @@
 const writer = require('../../utils/writer');
+const manifestModel = require('../../models/manifest');
 
 const addElement = require('./prompts/add-element');
 const addDashboardCard = require('./prompts/add-dashboard-card');
@@ -9,14 +10,19 @@ module.exports = {
         program
             .command('add <type>')
             .description('Add an element, dashboard-card or webhook to the manifest.')
-            .action(function (type) {
+            .action(async (type) => {
+                await manifestModel.fromFile();
+
                 switch (type) {
                     case 'element':
-                        addElement();
+                        addElement(manifestModel);
+                        break;
                     case 'dashboard-card':
-                        addDashboardCard();
+                        addDashboardCard(manifestModel);
+                        break;
                     case 'webhook':
-                        addWebhook();
+                        addWebhook(manifestModel);
+                        break;
                     default:
                         writer.error('Unknown type ' + type);
                 }
