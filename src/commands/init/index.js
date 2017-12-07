@@ -20,6 +20,10 @@ module.exports = {
                 console.log(chalk`
     Your app has successfully been created!
 
+    Enter your app:
+
+    cd ${answers.name}
+
     Check out these other commands to continue:
 
     {blue.bold weebly add element}
