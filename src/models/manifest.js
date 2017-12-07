@@ -27,6 +27,7 @@ module.exports = {
         process.chdir(dirname);
     },
     async build(values) {
+        this.data.manifest = 1;
         _.merge(this.data, _.pick(values, [
             'client_id', 
             'version', 
