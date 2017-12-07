@@ -5,6 +5,8 @@ const program = require('commander');
  */
 const initCommand = require('./commands/init');
 const addCommand = require('./commands/add');
+const listCommand = require('./commands/list');
+const deleteCommand = require('./commands/delete');
 
 /**
  * Initialize some basics about what the program is.
@@ -18,5 +20,7 @@ program
  */
 initCommand.command(program);
 addCommand.command(program);
+listCommand.command(program);
+deleteCommand.command(program);
 
 program.parse(process.argv);

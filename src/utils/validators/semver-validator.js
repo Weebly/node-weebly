@@ -1,4 +1,3 @@
-const 
 const writer = require('../writer');
 
 /**

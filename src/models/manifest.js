@@ -75,8 +75,54 @@ module.exports = {
         }
 
         await this.createElementDirectory(values.path);
-        await this.moveIcon(iconPath, values.path);
+        if (_.isString(iconPath)) {
+            await this.moveIcon(iconPath, values.path);
+        }
 
         this.data.elements.push(values);
+    },
+    setWebhooks(values) {
+        this.data.webhooks = values;
+    },
+
+
+    getElements() {
+        return this.data.elements;
+    },
+    getWebhooks() {
+        return this.data.webhooks;
+    },
+    getDashboardCards() {
+        return this.data.dashboard_cards;
+    },
+
+    findElement(name) {
+        return _.find(this.data.elements, (element) => element.name === name);
+    },
+    findDashboardCard(name) {
+        return _.find(this.data.dashboard_cards, (card) => card.name === name);
+    },
+
+    deleteElement(name) {
+        let newElements = _.reject(this.data.elements, (element) => element.name === name);
+
+        if (_.size(newElements) < _.size(this.data.elements)) {
+            this.data.elements = newElements;
+            this.toFile();
+            return true;
+        }
+
+        throw 'ERROR: No elements found with that name.';
+    },
+    deleteDashboardCard(name) {
+        let newCards = _.reject(this.data.dashboard_cards, (card) => card.name === name);
+
+        if (_.size(newCards) < _.size(this.data.dashboard_cards)) {
+            this.data.dashboard_cards = newCards;
+            this.toFile();
+            return true;
+        }
+
+        throw 'ERROR: No dashboard cards found with that name.';
     }
 }
