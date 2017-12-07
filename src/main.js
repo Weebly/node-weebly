@@ -23,4 +23,17 @@ addCommand.command(program);
 listCommand.command(program);
 deleteCommand.command(program);
 
+program.on('--help', () => {
+    console.log('');
+    console.log('');
+    console.log('  # Prerequisites:');
+    console.log('');
+    console.log('   * Weebly Developer Account');
+    console.log('   * Weebly App and API Keys');
+    console.log('');
+    console.log('   Getting Started Docs: https://dev.weebly.com');
+    console.log('');
+    console.log('');
+});
+
 program.parse(process.argv);
