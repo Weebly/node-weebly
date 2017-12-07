@@ -6,7 +6,7 @@ const questions = [
         type: 'input',
         name: 'callback_url',
         message: 'What is the callback_url for webhooks. This URL will receive webhook payloads.',
-        validate: value = urlValidator(value)
+        validate: value => urlValidator(value)
     },
     {
         type: 'checkbox',
