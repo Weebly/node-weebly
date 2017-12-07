@@ -1,0 +1,184 @@
+{
+  "definitions": {
+    "settingprops": {
+      "type": "object",
+      "required": ["name", "label", "type"],
+      "properties": {
+        "name": {},
+        "label": {},
+        "type": {
+          "enum": ["string", "text", "int", "slider", "toggle", "radio", "select", "color", "align", "group"]
+        },
+        "default": {},
+        "hidden": {},
+        "private": {},
+        "tooltip": {},
+        "step": {},
+        "min": {},
+        "max": {},
+        "values": {
+          "type": "array"
+        }
+      }
+    },
+    "externalsettingprops": {
+      "type": "object",
+      "required": ["url", "width", "height", "modal", "label", "fullscreen"]
+      "url": {
+        "type": "string",
+        "pattern": ""
+      },
+      "label": {
+        "type": "string"
+      },
+      "height": {
+        "type": "number"
+      },
+      "width": {
+        "type": "number"
+      },
+      "modal": {
+        "type": "boolean"
+      },
+      "fullscreen": {
+        "type": "boolean"
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$id": "/properties/elements",
+  "type": "array",
+  "items": {
+    "$id": "/properties/elements/items",
+    "type": "object",
+    "properties": {
+      "name": {
+        "$id": "/properties/elements/items/properties/name",
+        "type": "string",
+        "title": "Name of the element",
+        "description": "Internal name of the element, can be used as a programmatic reference.",
+        "default": "",
+        "examples": [
+          "Price Chart"
+        ]
+      },
+      "path": {
+        "$id": "/properties/elements/items/properties/path",
+        "type": "string",
+        "title": "Element Resources Path",
+        "description": "Relative path to the resources that define this element: HTML, CSS, JS",
+        "default": "",
+        "examples": [
+          "files"
+        ]
+      },
+      "version": {
+        "$id": "/properties/elements/items/properties/version",
+        "type": "string",
+        "title": "The Version Schema.",
+        "description": "An explanation about the purpose of this instance.",
+        "default": "",
+        "examples": [
+          "1.2.6"
+        ]
+      },
+      "settings": {
+        "$id": "/properties/elements/items/properties/settings",
+        "type": "object",
+        "properties": {
+          "config": {
+            "$id": "/properties/elements/items/properties/settings/properties/config",
+            "type": "object",
+            "properties": {
+              "autopop": {
+                "$id": "/properties/elements/items/properties/settings/properties/config/properties/autopop",
+                "type": "boolean",
+                "title": "The Autopop Schema.",
+                "description": "An explanation about the purpose of this instance.",
+                "default": false,
+                "examples": [
+                  false
+                ]
+              },
+              "external": {
+                "$id": "/properties/elements/items/properties/settings/properties/config/properties/external",
+                "type": "object",
+                "title": "External Settings",
+                "description": "Enables ability to provide external settings for an element",
+                "properties": { "$ref": "#/definitions/externalsettingprops"}
+              }
+            }
+          },
+          "properties": {
+            "$id": "/properties/elements/items/properties/settings/properties/properties",
+            "type": "array",
+            "items": {
+              "$id": "/properties/elements/items/properties/settings/properties/properties/items",
+              "type": "object",
+              "properties": { "$ref": "#/definitions/settingprops" }
+            }
+          }
+        },
+        "required": [
+          "config",
+          "properties"
+        ]
+      },
+      "tutorial": {
+        "$id": "/properties/elements/items/properties/tutorial",
+        "type": "object",
+        "properties": {
+          "introduction": {
+            "$id": "/properties/elements/items/properties/tutorial/properties/introduction",
+            "type": "string",
+            "title": "Tutorial Introduction.",
+            "description": "Help on-board users to configure your dashboard card.",
+            "default": "",
+            "examples": [
+              "Tutorial Introduction"
+            ]
+          },
+          "type": {
+            "$id": "/properties/elements/items/properties/tutorial/properties/type",
+            "type": "string",
+            "title": "Tutorial Content Type",
+            "description": "The type of this content.",
+            "enum": ["steps", "video", "topics"],
+            "examples": [
+              "steps"
+            ]
+          },
+          "content": {
+            "$id": "/properties/elements/items/properties/tutorial/properties/content",
+            "type": "array",
+            "items": {
+              "$id": "/properties/elements/items/properties/tutorial/properties/content/items",
+              "type": "string",
+              "title": "Tutorial Content",
+              "description": "The actual content for your tutorial.",
+              "default": "",
+              "examples": [
+                "Step"
+              ]
+            }
+          },
+          "autopop": {
+            "$id": "/properties/elements/items/properties/tutorial/properties/autopop",
+            "type": "boolean",
+            "title": "Tutorial Autopop",
+            "description": "Should the tutorial auto-display on installation?.",
+            "default": false,
+            "examples": [
+              true
+            ]
+          }
+        }
+      }
+    },
+    "required": [
+      "name",
+      "path",
+      "version"
+    ]
+  }
+}
