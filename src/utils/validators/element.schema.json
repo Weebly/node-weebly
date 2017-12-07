@@ -23,7 +23,7 @@
     },
     "externalsettingprops": {
       "type": "object",
-      "required": ["url", "width", "height", "modal", "label", "fullscreen"]
+      "required": ["url", "width", "height", "modal", "label", "fullscreen"],
       "url": {
         "type": "string",
         "pattern": ""
