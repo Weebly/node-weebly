@@ -32,7 +32,7 @@ module.exports = {
     command(program) {
         program
             .command('list <type>')
-            .description('List the contents of the manifest.')
+            .description('List the contents of the manifest. \n  Valid "type" argument values: `element[s]`, `dashboard-card[s]`, `webhook[s]`')
             .action(async (type) => {
                 try {
                     await manifestModel.fromFile();

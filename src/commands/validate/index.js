@@ -21,12 +21,10 @@ module.exports = {
                 let validate = validator.compile(manifestSchema); // Load the schema(s)
                 let isValid = validate(manifestModel.data); // Validate manifest.json with schema(s)
                 if(!isValid) {
-                    writer.error('Whoopsie! Your `manifest.json` file is invalid.');
-                    return writer.error(validate.errors); // Show all validation errors
+                    //writer.error('Whoopsie! Your `manifest.json` file is invalid.');
+                    writer.error(validate.errors); // Show all validation errors
                 } else {
-                    // TODO: Might need to use console.log here instead.
-                    //return writer.default('`manifest.json` is valid');
-                    console.log('Hooray! Your `manifest.json` file is valid');
+                    return console.log('Hooray! Your `manifest.json` file is valid');
                 }
             });
     }

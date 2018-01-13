@@ -6,7 +6,6 @@ module.exports = {
     data: {},
     async fromFile(pathToManifestJSON = './manifest.json') {
         try {
-            //console.log('Using: ', pathToManifestJSON);
             this.data = await jsonfile.readFileSync(pathToManifestJSON);
         } catch (e) {
             throw 'ERROR: Could not read manifest.json';
@@ -127,4 +126,4 @@ module.exports = {
 
         throw 'ERROR: No dashboard cards found with that name.';
     }
-}
+};
