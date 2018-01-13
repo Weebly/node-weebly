@@ -7,7 +7,7 @@ module.exports = {
     command(program) {
         program
             .command('init')
-            .description('Initialize a Weebly application.')
+            .description('Initialize Weebly applications.')
             .action(async function () {
                 let answers = await initialPrompt();
 

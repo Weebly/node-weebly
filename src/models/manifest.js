@@ -4,9 +4,10 @@ const jsonfile = require('jsonfile');
 
 module.exports = {
     data: {},
-    async fromFile() {
+    async fromFile(pathToManifestJSON = './manifest.json') {
         try {
-            this.data = await jsonfile.readFileSync('manifest.json');
+            //console.log('Using: ', pathToManifestJSON);
+            this.data = await jsonfile.readFileSync(pathToManifestJSON);
         } catch (e) {
             throw 'ERROR: Could not read manifest.json';
         }

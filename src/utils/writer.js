@@ -1,4 +1,5 @@
 const chalk = require('chalk');
+const util = require('util');
 
 module.exports = {
     info: (message) => {
@@ -8,7 +9,13 @@ module.exports = {
         console.log(chalk.yellow(message));
     },
     error: (message) => {
-        console.log(chalk.bold.red("\n" + message));
+        if(Array.isArray(message)) {
+            message.forEach((item) => {
+                console.error(chalk.bold.red("\n" + util.inspect(item, false, null)));
+            })
+        } else {
+            console.error(chalk.bold.red("\n" + message));
+        }
     },
     default: (message, bold) => {
         if (bold) {
