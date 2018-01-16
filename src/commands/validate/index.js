@@ -1,6 +1,6 @@
 const writer = require('../../utils/writer');
 const manifestModel = require('../../models/manifest');
-const manifestSchema = require('../../utils/validators/manifest.schema');
+const manifestSchema = require('../../utils/validators/schemas/manifest.schema');
 const AJV = require('ajv');
 
 // VARS

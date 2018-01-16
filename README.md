@@ -1,10 +1,44 @@
 # Node Weebly CLI
 
-Simple utility to help Weebly Developers build apps for App Center quicker and with fewer issues.
+Command Line Interface (CLI) utility for helping Weebly Developers build apps quicker and easier for App Center and with fewer issues.
+
+The Weebly CLI is open source software which empowers developers to quickly scaffold their Weebly applications.
+
+There are four (4) primary types of apps developers can create:
+* [Elements](https://dev.weebly.com/what-are-elements.html)
+* [Dashboard Cards](https://dev.weebly.com/what-are-dashboard-cards.html)
+* [Backend Services](https://dev.weebly.com/create-a-backend-service.html#backend-service-apps)
+* [Snippets](https://dev.weebly.com/create-a-backend-service.html#snippets)
+
+Developers can also create custom [Themes](https://dev.weebly.com/get-started-with-themes.html), however the Weebly CLI does not support themes at this time.
+
+Please see our milestones and issues page to contribute to this open source community resource for Weebly developers.
+
+# Prerequsites
+
+Prior to using the `weebly init` command to initialize a new Weebly app, you will need to have defined the app on [Weebly Developer Admin Portal](https://dev.weebly.com) first, your `client_id` will be required to access any of the [Weebly APIs](https://dev.weebly.com/about-rest-apis.html) or to subscribe and use [Weebly Webhooks](https://dev.weebly.com/use-webhooks.html).
+
+You will need:
+* `callback_url` = Endpoint in your app to handle [App Installation and Authorization](https://dev.weebly.com/app-authorization-and-install-flow.html)
+* `client_id` = Unique identifier for your app, provided by [Weebly Developer Admin Portal](https://dev.weebly.com)
+* `manage_url` = [OPTIONAL] Endpoint in your app for users to configure/manage their instance's settings of your app on their site 
+* Webhook `callback_url` = [OPTIONAL] Endpoint in your app if you plan to consume [Weebly Webhooks](https://dev.weebly.com/use-webhooks.html)
 
 ## Getting Started
 
-1. Install the Weebly CLI: `npm i -g weebly` TODO: Need to make sure this name is available on NPM, if not update this value. Use BREW?
+// TODO: Need to make sure this name is available on NPM, if not update this value. Use BREW?
+
+1. Install the Weebly CLI: `npm i -g weebly`
+2. View list of commands with help: `weebly -h` -OR- `weebly --help`
+3. Initialize a new Weebly App: `weebly init`
+
+## Commands
+
+* `init`
+* `list`
+* `add`
+* `delete`
+* `validate`
 
 ## Authors
 * [Daniel Lett](https://github.com/dlett)
