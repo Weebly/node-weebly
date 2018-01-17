@@ -14,7 +14,7 @@ module.exports = {
     command(program) {
         program
             .command('validate [pathTomManifestJSON]')
-            .description('Validate the manifest file against the JSON schema Weebly is expecting.')
+            .description('Validate your `manifest.json` file, w/o path argument expects `manifest.json` in PWD.')
             .action(async (pathToManifestJSON = './manifest.json') => {
                 try {
                     await manifestModel.fromFile(pathToManifestJSON);
