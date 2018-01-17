@@ -27,7 +27,7 @@
         "style": {
             "title": "Text Component Warning Style",
             "description": "Sets a warning style title in `orange` with light orange background  for this text component if set to 'warning'",
-            "type": ["string", "null"]
+            "type": ["string", "null"],
             "pattern": "^(warning)?$"
         }
       }
@@ -35,7 +35,7 @@
     "link": {
       "title": "Link Component Type",
       "description": "Similar to Text Component, but includes ability to display information to the right in blue",
-      "type": "",
+      "type": ["object", "null"],
       "required": ["link", "label"],
       "properties": {
         "label": {
@@ -235,7 +235,7 @@
     "group": {
       "title": "Group Component",
       "description": "Allows developers to group two or more components together, when group indented, with optinoal label",
-      "type": "object",
+      "type": ["object", "null"],
       "required": ["components"],
       "properties": {
         "label": {
@@ -246,8 +246,8 @@
         "components": {
           "title": "Group Component Components",
           "description": "Components included within specified group",
-          "type": "array",
-          "properties": {
+          "type": ["array", "null"],
+          "items": {
               "anyOf": [
                 {"$ref": "#/definitions/text"},
                 {"$ref": "#/definitions/link"},
@@ -278,9 +278,9 @@
           "name": {
             "$id": "/properties/dashboard_cards/items/properties/name",
             "type": "string",
-            "title": "The Name Schema.",
-            "description": "An explanation about the purpose of this instance.",
-            "default": "",
+            "title": "Dashboard Card Name",
+            "description": "Computer readable name of this dashboard card.",
+            "default": "Your dashboard card name",
             "examples": [
               "sample"
             ]
@@ -288,9 +288,9 @@
           "version": {
             "$id": "/properties/dashboard_cards/items/properties/version",
             "type": "string",
-            "title": "The Version Schema.",
-            "description": "An explanation about the purpose of this instance.",
-            "default": "",
+            "title": "Dashboard Card Version",
+            "description": "Semantic version of this dashboard card.",
+            "default": "0.1.0",
             "examples": [
               "0.1.0"
             ]
@@ -298,8 +298,8 @@
           "label": {
             "$id": "/properties/dashboard_cards/items/properties/label",
             "type": "string",
-            "title": "The Label Schema.",
-            "description": "An explanation about the purpose of this instance.",
+            "title": "Dashboard Card Label",
+            "description": "Label displayed for this dashboard card in the title.",
             "default": "",
             "examples": [
               "My Data"
@@ -308,8 +308,8 @@
           "icon": {
             "$id": "/properties/dashboard_cards/items/properties/icon",
             "type": "string",
-            "title": "The Icon Schema.",
-            "description": "An explanation about the purpose of this instance.",
+            "title": "Dashboard Card Icon",
+            "description": "The icon image file for this dashboard card to display in the Weebly editor.",
             "default": "",
             "examples": [
               "path/icon.svg"
@@ -318,9 +318,10 @@
           "link": {
             "$id": "/properties/dashboard_cards/items/properties/link",
             "type": "string",
-            "title": "The Link Schema.",
-            "description": "An explanation about the purpose of this instance.",
-            "default": "",
+            "title": "Dashboard Card Link",
+            "description": "URL to load in the takeover modal when the title of this dashboard card is clicked.",
+            "default": "https://yourdomain.tld.setup/:jwt",
+            "format": "uri",
             "examples": [
               "https://yourdomain.tld/setup/:jwt"
             ]
@@ -330,8 +331,8 @@
             "type": "array",
             "items": {
               "$id": "/properties/dashboard_cards/items/properties/default/components",
-              "type": ["object", "array", null],
-              "title": "Components",
+              "type": ["object", "array", "null"],
+              "title": "Default content for this dashboard card",
               "description": "Must be valid Dashboard Card Component Type(s), empty array === no card until API update, or nested arrays of components to define panes.",
               "anyOf": [
                 {"$ref": "#/definitions/text"},
