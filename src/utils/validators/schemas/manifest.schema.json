@@ -1,4 +1,73 @@
 {
+  "definitions": {
+    "callback_url": {
+      "type": ["string", "null"],
+      "title": "App OAuth Callback URL",
+      "format": "uri",
+      "description": "The app callback URL used during OAuth2 Authorization Flow, must implement the `https` scheme",
+      "default": "https://example.foo/auth/weebly/callback",
+      "examples": [
+        "https://yourdomain.tld/auth/weebly/callback"
+      ]
+    },
+    "manage_app_url": {
+      "type": ["string", "null"],
+      "title": "External App Management URL",
+      "description": "The URL to manage external settings for this app, must implement the `https` scheme",
+      "format": "uri",
+      "default": "https://example.foo/weebly/manage",
+      "examples": [
+        "https://yourdomain.tld/myapp/manage"
+      ]
+    },
+    "scopes": {
+      "type": ["array", "null"],
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$id": "/properties/scopes/items",
+        "type": "string",
+        "title": "App scope",
+        "description": "The scopes required by this application if accessing the API",
+        "default": "read:site",
+        "enum": [
+          "read:blog",
+          "write:blog",
+          "read:site",
+          "write:site",
+          "read:store-catalog",
+          "write:store-catalog",
+          "read:store-orders",
+          "write:store-orders",
+          "read:membership",
+          "write:membership"
+        ],
+        "examples": [
+          "read:site"
+        ]
+      }
+    },
+    "locale": {
+      "type": ["string", "null"],
+      "title": "Locale schema",
+      "description": "Localization information about this app.",
+      "pattern": "^[a-zA-Z]{2}-[a-zA-Z]{2}$",
+      "default": "en-us",
+      "examples": [
+        "en-gb"
+      ]
+    },
+    "client_id": {
+      "type": ["string", "null"],
+      "title": "Your app's Client ID",
+      "description": "The OAuth2 `client_id` as provided by the Weebly Developer Admin, note that `client_id` === `app_id`",
+      "pattern": "^[0-9]{10}$",
+      "default": "",
+      "examples": [
+        "1919192384"
+      ]
+    }
+  },
   "$schema": "http://json-schema.org/draft-06/schema#",
   "title": "Weebly app manifest",
   "description": "The mandatory JSON file which must be present at the root of all Weebly apps for App Center",
@@ -24,33 +93,20 @@
         "3.1.0"
       ]
     },
+    "locale": {
+      "$ref": "#/definitions/locale"
+    },
+    "client_id": {
+      "$ref": "#/definitions/client_id"
+    },
+    "callback_url": {
+      "$ref": "#/definitions/callback_url"
+    },
+    "manage_app_url": {
+      "$ref": "#/definitions/manage_app_url"
+    },
     "scopes": {
-      "$id": "/properties/scopes",
-      "type": "array",
-      "minItems": 1,
-      "uniqueItems": true,
-      "items": {
-        "$id": "/properties/scopes/items",
-        "type": "string",
-        "title": "App scope",
-        "description": "The scopes required by this application if accessing the API",
-        "default": "read:site",
-        "enum": [
-          "read:blog",
-          "write:blog",
-          "read:site",
-          "write:site",
-          "read:store-catalog",
-          "write:store-catalog",
-          "read:store-orders",
-          "write:store-orders",
-          "read:membership",
-          "write:membership"
-        ],
-        "examples": [
-          "read:site"
-        ]
-      }
+      "$ref": "#/definitions/scopes"
     }
   },
   "required": [

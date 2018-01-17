@@ -17,7 +17,7 @@
             "description": "URL to content displayed in takeover when arrow is clicked",
             "example": "https://yourdomain.tld/dashboard_card_link",
             "type": "string",
-            "pattern": "^(https?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$"
+            "format": "uri"
         },
         "title": {
             "title": "Text Component Title",
@@ -104,7 +104,7 @@
           "description": "URL displayed in takeover content when arrow is clicked, must implement `https` scheme",
           "type": "string",
           "example": "https://yourdomain.tld/stat/content",
-          "pattern": "^(https?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$"
+          "format": "uri"
         }
       }
     },
@@ -123,7 +123,7 @@
           "title": "Action Component Link",
           "description": "URL to display in takeover when link is clicked. Must implement `https` scheme",
           "type": "string",
-          "pattern": "^(https?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$"
+          "format": "uri",
           "example": "https://yourdomain.tld/cta"
         },
         "action_type": {
@@ -148,7 +148,7 @@
           "title": "Welcome Component Text",
           "description": "Text displayed below the headline",
           "type": "string",
-          "pattern": "^[a-zA-Z0-9\s]{1,160}$"
+          "pattern": "^[a-zA-Z0-9\\s]{1,160}$"
         },
         "action_label": {
           "title": "Welcome Component Action Label",
@@ -159,7 +159,7 @@
           "title": "Welcome Component Action Link",
           "description": "URL to takeover content displayed when button is clicked, must implement `https` scheme",
           "type": "string",
-          "pattern": "^(https?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$",
+          "format": "uri",
           "example": "https://yourdomain.tld/cta"
         }
       }
@@ -189,7 +189,7 @@
           "title": "Event Component Link",
           "description": "URL to takeover content displayed when component is clicked, must implement `https` scheme",
           "type": "string",
-          "pattern": "^(https?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$",
+          "format": "uri",
           "example": "https://yourdomain.tld/cta"
         }
       }
@@ -227,7 +227,7 @@
           "title": "Progress Component Link",
           "description": "URL to takeover content displayed when component is clicked, must implement `https` scheme",
           "type": "string",
-          "pattern": "^(https?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$",
+          "format": "uri",
           "example": "https://yourdomain.tld/progress"
         }
       }

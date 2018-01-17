@@ -1,6 +1,8 @@
 const writer = require('../../utils/writer');
 const manifestModel = require('../../models/manifest');
 const manifestSchema = require('../../utils/validators/schemas/manifest.schema');
+const elementSchema = require('../../utils/validators/schemas/element.schema')
+const dashboardCardSchema = require('../../utils/validators/schemas/dashboard_card.schema')
 const AJV = require('ajv');
 
 // VARS
@@ -18,11 +20,14 @@ module.exports = {
                 } catch (e) {
                     return writer.error(e);
                 }
-                let validate = validator.compile(manifestSchema); // Load the schema(s)
+                let validate = validator
+                    //.addSchema(elementSchema, "elements")
+                    //.addSchema(dashboardCardSchema, "dashboardCards")
+                    .compile(manifestSchema); // Load the schema(s)
                 let isValid = validate(manifestModel.data); // Validate manifest.json with schema(s)
                 if(!isValid) {
                     //writer.error('Whoopsie! Your `manifest.json` file is invalid.');
-                    writer.error(validate.errors); // Show all validation errors
+                    return writer.error(validate.errors); // Show all validation errors
                 } else {
                     return console.log('Hooray! Your `manifest.json` file is valid');
                 }

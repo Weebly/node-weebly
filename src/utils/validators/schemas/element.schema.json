@@ -22,11 +22,10 @@
       }
     },
     "externalsettingprops": {
-      "type": "object",
-      "required": ["url", "width", "height", "modal", "label", "fullscreen"],
+      "type": ["object", "null"],
       "url": {
         "type": "string",
-        "pattern": ""
+        "format": "uri"
       },
       "label": {
         "type": "string"
