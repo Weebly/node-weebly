@@ -94,6 +94,8 @@ module.exports = {
         return this.data.webhooks;
     },
     getDashboardCards() {
+        console.log('getDashboardCards called...');
+        console.log('manifest.data: ', this.data)
         return this.data.dashboard_cards;
     },
 

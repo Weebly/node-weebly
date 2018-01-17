@@ -6,7 +6,7 @@ const writer = require('../writer');
  * @param {string} value 
  */
 module.exports = (value) => {
-    let res = value.match(/^[a-zA-Z0-9]{1,25}$/);
+    let res = value.match(/^[a-zA-Z0-9\s]{1,25}$/);
     if(res === null) {
         writer.error('Alphanumeric, but not all numbers. 25 character max');
         return false;                
