@@ -45,7 +45,7 @@
     }
   },
   "$schema": "http://json-schema.org/draft-06/schema#",
-  "$id": "/properties/elements",
+  "$id": "https://dev.weebly.com/definitions/elements.json",
   "type": "array",
   "items": {
     "$id": "/properties/elements/items",

@@ -27,7 +27,7 @@
         "style": {
             "title": "Text Component Warning Style",
             "description": "Sets a warning style title in `orange` with light orange background  for this text component if set to 'warning'",
-            "type": "string",
+            "type": ["string", "null"]
             "pattern": "^(warning)?$"
         }
       }
@@ -264,7 +264,7 @@
     }
   },
   "$schema": "http://json-schema.org/draft-06/schema#",
-  "$id": "https://dev.weebly.com/definitions/dashboard_card.json",
+  "$id": "https://dev.weebly.com/definitions/dashboard_cards.json",
   "type": "array",
   "minItems": 1,
   "properties": {
