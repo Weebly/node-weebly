@@ -1,13 +1,28 @@
 {
   "definitions": {
-    "settingprops": {
+    "settingtypes": {
       "type": "object",
-      "required": ["name", "label", "type"],
+      "required": [
+        "name",
+        "label",
+        "type"
+      ],
       "properties": {
         "name": {},
         "label": {},
         "type": {
-          "enum": ["string", "text", "int", "slider", "toggle", "radio", "select", "color", "align", "group"]
+          "enum": [
+            "string",
+            "text",
+            "int",
+            "slider",
+            "toggle",
+            "radio",
+            "select",
+            "color",
+            "align",
+            "group"
+          ]
         },
         "default": {},
         "hidden": {},
@@ -22,31 +37,39 @@
       }
     },
     "externalsettingprops": {
-      "type": ["object", "null"],
-      "url": {
-        "type": "string",
-        "format": "uri"
-      },
-      "label": {
-        "type": "string"
-      },
-      "height": {
-        "type": "number"
-      },
-      "width": {
-        "type": "number"
-      },
-      "modal": {
-        "type": "boolean"
-      },
-      "fullscreen": {
-        "type": "boolean"
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "label": {
+          "type": "string"
+        },
+        "height": {
+          "type": "number"
+        },
+        "width": {
+          "type": "number"
+        },
+        "modal": {
+          "type": "boolean"
+        },
+        "fullscreen": {
+          "type": "boolean"
+        }
       }
     }
   },
   "$schema": "http://json-schema.org/draft-06/schema#",
   "$id": "https://dev.weebly.com/definitions/elements.json",
-  "type": "array",
+  "type": [
+    "array",
+    "null"
+  ],
   "items": {
     "$id": "/properties/elements/items",
     "type": "object",
@@ -100,84 +123,92 @@
                 ]
               },
               "external": {
-                "$id": "/properties/elements/items/properties/settings/properties/config/properties/external",
-                "type": "object",
-                "title": "External Settings",
-                "description": "Enables ability to provide external settings for an element",
-                "properties": { "$ref": "#/definitions/externalsettingprops"}
+                "$ref": "#/definitions/externalsettingprops"
               }
             }
           },
           "properties": {
-            "$id": "/properties/elements/items/properties/settings/properties/properties",
-            "type": "array",
-            "items": {
-              "$id": "/properties/elements/items/properties/settings/properties/properties/items",
-              "type": "object",
-              "properties": { "$ref": "#/definitions/settingprops" }
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "label": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "pattern": "/^group$/g",
+                "default": "group"
+              },
+              "properties": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "$ref": "#/definitions/settingtypes"
+                }
+              }
             }
           }
         },
-        "required": [
-          "config",
-          "properties"
-        ]
-      },
-      "tutorial": {
-        "$id": "/properties/elements/items/properties/tutorial",
-        "type": "object",
-        "properties": {
-          "introduction": {
-            "$id": "/properties/elements/items/properties/tutorial/properties/introduction",
-            "type": "string",
-            "title": "Tutorial Introduction.",
-            "description": "Help on-board users to configure your dashboard card.",
-            "default": "",
-            "examples": [
-              "Tutorial Introduction"
-            ]
-          },
-          "type": {
-            "$id": "/properties/elements/items/properties/tutorial/properties/type",
-            "type": "string",
-            "title": "Tutorial Content Type",
-            "description": "The type of this content.",
-            "enum": ["steps", "video", "topics"],
-            "examples": [
-              "steps"
-            ]
-          },
-          "content": {
-            "$id": "/properties/elements/items/properties/tutorial/properties/content",
-            "type": "array",
-            "items": {
-              "$id": "/properties/elements/items/properties/tutorial/properties/content/items",
+        "tutorial": {
+          "$id": "/properties/elements/items/properties/tutorial",
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "introduction": {
+              "$id": "/properties/elements/items/properties/tutorial/properties/introduction",
               "type": "string",
-              "title": "Tutorial Content",
-              "description": "The actual content for your tutorial.",
+              "title": "Tutorial Introduction.",
+              "description": "Help on-board users to configure your dashboard card.",
               "default": "",
               "examples": [
-                "Step"
+                "Tutorial Introduction"
+              ]
+            },
+            "type": {
+              "$id": "/properties/elements/items/properties/tutorial/properties/type",
+              "type": "string",
+              "title": "Tutorial Content Type",
+              "description": "The type of this content.",
+              "enum": [
+                "steps",
+                "video",
+                "topics"
+              ],
+              "examples": [
+                "steps"
+              ]
+            },
+            "content": {
+              "$id": "/properties/elements/items/properties/tutorial/properties/content",
+              "type": "array",
+              "items": {
+                "$id": "/properties/elements/items/properties/tutorial/properties/content/items",
+                "type": "string",
+                "title": "Tutorial Content",
+                "description": "The actual content for your tutorial.",
+                "default": "",
+                "examples": [
+                  "Step"
+                ]
+              }
+            },
+            "autopop": {
+              "$id": "/properties/elements/items/properties/tutorial/properties/autopop",
+              "type": "boolean",
+              "title": "Tutorial Autopop",
+              "description": "Should the tutorial auto-display on installation?.",
+              "default": false,
+              "examples": [
+                true
               ]
             }
-          },
-          "autopop": {
-            "$id": "/properties/elements/items/properties/tutorial/properties/autopop",
-            "type": "boolean",
-            "title": "Tutorial Autopop",
-            "description": "Should the tutorial auto-display on installation?.",
-            "default": false,
-            "examples": [
-              true
-            ]
           }
         }
       }
-    },
-    "required": [
-      "name",
-      "path",
-      "version"
-    ]
+    }
   }
 }
