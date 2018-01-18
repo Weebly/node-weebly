@@ -58,6 +58,17 @@ module.exports = {
             await fs.mkdirSync(directory);
         }
     },
+    async createDashboardCardDirectory(directory) {
+        let dashboardCardsDirectoryExists = await fs.existsSync('dashboard_cards');
+        if (!dashboardCardsDirectoryExists) {
+            await fs.mkdirSync('dashboard_cards');
+        }
+
+        let dashboardCardDirectoryExists = await fs.existsSync(directory);
+        if (!dashboardCardDirectoryExists) {
+            await fs.mkdirSync(directory);
+        }
+    },
     async moveIcon(iconPath, directory) {
         if (!iconPath.endsWith('.svg')) {
             throw 'ERROR: Icon must be an SVG.';
@@ -82,6 +93,18 @@ module.exports = {
 
         this.data.elements.push(values);
     },
+    async addDashboardCard(values, iconPath) {
+        if (!_.isArray(this.data.dashboard_cards)) {
+            this.data.dashboard_cards = [];
+        }
+
+        await this.createDashboardCardDirectory(values.path);
+        if (_.isString(iconPath)) {
+            await this.moveIcon(iconPath, values.path);
+        }
+
+        this.data.dashboard_cards.push(values);
+    },
     setWebhooks(values) {
         this.data.webhooks = values;
     },
@@ -94,8 +117,6 @@ module.exports = {
         return this.data.webhooks;
     },
     getDashboardCards() {
-        console.log('getDashboardCards called...');
-        console.log('manifest.data: ', this.data)
         return this.data.dashboard_cards;
     },
 
