@@ -26,20 +26,18 @@ You will need:
 
 ## Getting Started
 
-// TODO: Need to make sure this name is available on NPM, if not update this value. Use BREW?
-
-1. Install the Weebly CLI: `npm i -g weebly`
+1. Install the Weebly CLI: `npm i -g node-weebly`
 2. View list of commands with help: `weebly -h` -OR- `weebly --help`
 3. Initialize a new Weebly App: `weebly init`
 4. Change your working directory into the newly created Weebly App Directory `cd <YOUR APP DIR NAME>`
 
 ## Usage 
 
-* `init`
-* `list`
-* `add`
-* `delete`
-* `validate`
+* `weebly init` - Creates a new Weebly app project directory and dependencies
+* `weebly list <type>` - List of different `type` of apps
+* `weebly add <type>` - Adds a new app `type` can be: "element", "dashboard-card", or "webhook"
+* `weebly delete <type> <name>` - Deletes a `type` of app by `name`
+* `weebly validate` - Validates that your app's `manifest.json` is valid
 
 ## Authors
 * [Daniel Lett](https://github.com/dlett)
