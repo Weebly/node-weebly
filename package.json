@@ -1,7 +1,13 @@
 {
   "name": "node-weebly",
   "version": "0.2.0",
-  "description": "Weebly Platform Developer Tools",
+  "description": "Weebly Platform Developer command line interface tool used for creating apps to be published on Weebly's App Center",
+  "homepage": "https://github.com/weebly/node-weebly",
+  "bugs": "https://github.com/weebly/node-weebly/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/weebly/node-weebly.git"
+  },
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,10 +19,29 @@
   "keywords": [
     "weebly",
     "developer",
-    "helper"
+    "platform",
+    "elements",
+    "dashboard cards",
+    "websites",
+    "helper",
+    "cli"
   ],
-  "author": "Weebly Inc.",
-  "license": "ISC",
+  "author": {
+      "name": "Benjamin Dean",
+      "email": "benjamin@weebly.com",
+      "url": "https://github.com/bdeanindy"
+  },
+  "contributors": [
+    {
+      "name": "Daniel Lett",
+      "url": "https://github.com/dlett"
+    },
+    {
+      "name": "Robin Whitmore",
+      "url": "https://github.com/robinwhitmore"
+    }
+  ],
+  "license": "MIT",
   "dependencies": {
     "ajv": "^6.0.1",
     "chalk": "^2.3.0",
@@ -27,6 +52,6 @@
     "lodash": "^4.17.4"
   },
   "engines": {
-    "node": ">=8.9.0"
+    "node": ">=8.9.4"
   }
 }

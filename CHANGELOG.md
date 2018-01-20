@@ -1,6 +1,6 @@
 CHANGELOG
 ---------
-- **0.2.0** - 2018-01-19
+- **1.0.0** - 2018-01-19
   - Add basic `manifest.json` validators
   - Add `add dashboard-card`, `add webhook`, `delete dashboard-card`, `delete element`, and `delete webhook` commands
   - Add removal of app-type-specific sub-directories when respective `delete <type>` command is called
