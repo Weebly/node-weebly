@@ -1,6 +1,6 @@
 {
   "name": "node-weebly",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "Weebly Platform Developer command line interface tool used for creating apps to be published on Weebly's App Center",
   "homepage": "https://github.com/weebly/node-weebly",
   "bugs": "https://github.com/weebly/node-weebly/issues",
@@ -27,9 +27,9 @@
     "cli"
   ],
   "author": {
-      "name": "Benjamin Dean",
-      "email": "benjamin@weebly.com",
-      "url": "https://github.com/bdeanindy"
+    "name": "Benjamin Dean",
+    "email": "benjamin@weebly.com",
+    "url": "https://github.com/bdeanindy"
   },
   "contributors": [
     {
