@@ -20,6 +20,7 @@ const questions = [
         type: 'input',
         name: 'element_version',
         message: 'What is the element\'s version? The version of an element has to be equal to or less than the app\'s version.',
+        default: '0.1.0',
         validate: value => semverValidator(value)
     },
     {
@@ -57,8 +58,8 @@ const questions = [
     }
 ];
 
-generatePath = (name) => {
-    return 'files/' + name.toString().toLowerCase()
+generateElementPath = (name) => {
+    return 'elements/' + name.toString().toLowerCase()
         .replace(/\s+/g, '-')           // Replace spaces with -
         .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
         .replace(/\-\-+/g, '-')         // Replace multiple - with single -
@@ -83,7 +84,7 @@ module.exports = async (manifestModel) => {
 
     let values = {
         name: answers.element_name,
-        path: generatePath(answers.element_name),
+        path: generateElementPath(answers.element_name),
         version: answers.element_version,
         config: {
             autopop: answers.settings_dialog_immediate === 'Yes'

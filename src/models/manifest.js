@@ -1,6 +1,20 @@
 const _ = require('lodash');
 const fs = require('fs');
+const fse = require('fs-extra');
 const jsonfile = require('jsonfile');
+
+// CONSTANTS
+// TODO: Implement these later to prevent bugs
+const MANIFEST_FILENAME         = 'manifest.json';
+const DASHBOARD_CARDS_DIRNAME   = 'dashboard_cards';
+const ELEMENTS_DIRNAME          = 'elements';
+const WEBHOOKS_DIRNAME          = 'webhooks';
+const BACKEND_SERVICES_DIRNAME  = 'backend_services';
+const SNIPPETS_DIRNAME          = 'snippets';
+const SNIPPETS_FILENAME         = 'snippet.tpl';
+const ICON_DEFAULT_FILENAME     = 'icon.svg';
+const ICON_EXTENSION            = '.svg';
+const BASE_DIR                  = process.cwd();
 
 module.exports = {
     data: {},
@@ -20,6 +34,7 @@ module.exports = {
         await fs.writeFileSync('files/html/snippet.tpl', '');
     },
     async initialize(projectName) {
+
         await fs.mkdirSync(projectName);
 
         let dirname = `${process.cwd()}/${projectName}`;
@@ -48,9 +63,9 @@ module.exports = {
     },
 
     async createElementDirectory(directory) {
-        let filesDirectoryExists = await fs.existsSync('files');
-        if (!filesDirectoryExists) {
-            await fs.mkdirSync('files');
+        let elementsDirectoryExists = await fs.existsSync('elements');
+        if (!elementsDirectoryExists) {
+            await fs.mkdirSync('elements');
         }
 
         let elementDirectoryExists = await fs.existsSync(directory);
@@ -59,18 +74,20 @@ module.exports = {
         }
     },
     async createDashboardCardDirectory(directory) {
-        let dashboardCardsDirectoryExists = await fs.existsSync('dashboard_cards');
-        if (!dashboardCardsDirectoryExists) {
-            await fs.mkdirSync('dashboard_cards');
+        console.log('directory: ', directory);
+        let parentDirectoryExists = await fs.existsSync(`${process.cwd()}/dashboard_cards`);
+        if (!parentDirectoryExists) {
+            await fs.mkdirSync(`${process.cwd()}/dashboard_cards`);
         }
 
-        let dashboardCardDirectoryExists = await fs.existsSync(directory);
+        let dashboardCardDirectoryExists = await fs.existsSync(`${process.cwd()}/${directory}`);
         if (!dashboardCardDirectoryExists) {
-            await fs.mkdirSync(directory);
+            await fs.mkdirSync(`${process.cwd()}/${directory}`);
         }
     },
+
     async moveIcon(iconPath, directory) {
-        if (!iconPath.endsWith('.svg')) {
+        if (!String.isString(iconPath) || !iconPath.endsWith('.svg')) {
             throw 'ERROR: Icon must be an SVG.';
         }
 
@@ -99,11 +116,12 @@ module.exports = {
         }
 
         await this.createDashboardCardDirectory(values.path);
+
         if (_.isString(iconPath)) {
             await this.moveIcon(iconPath, values.path);
         }
 
-        this.data.dashboard_cards.push(values);
+        this.data.dashboard_cards.push(_.omit(values, 'path'));
     },
     setWebhooks(values) {
         this.data.webhooks = values;
@@ -127,26 +145,46 @@ module.exports = {
         return _.find(this.data.dashboard_cards, (card) => card.name === name);
     },
 
-    deleteElement(name) {
+    async deleteElementByName(name) {
+        // Removes the element from `manifes.json`
         let newElements = _.reject(this.data.elements, (element) => element.name === name);
-
         if (_.size(newElements) < _.size(this.data.elements)) {
             this.data.elements = newElements;
             this.toFile();
-            return true;
         }
 
-        throw 'ERROR: No elements found with that name.';
+        let elementDir = `${process.cwd()}/elements/${name}`;
+        let elementDirectoryExists = fs.existsSync(elementDir);
+        if (elementDirectoryExists) {
+            try {
+                await fse.remove(elementDir);
+            } catch (e) {
+                console.error(e);
+                throw e;
+            }
+        } else {
+            return console.log('No related directory to delete for this element, but it has been removed from the `manifest.json`');
+        }
     },
-    deleteDashboardCard(name) {
+    async deleteDashboardCardByName(name) {
+        // Removes the dashboard-card from `manifes.json`
         let newCards = _.reject(this.data.dashboard_cards, (card) => card.name === name);
-
         if (_.size(newCards) < _.size(this.data.dashboard_cards)) {
             this.data.dashboard_cards = newCards;
             this.toFile();
-            return true;
         }
 
-        throw 'ERROR: No dashboard cards found with that name.';
+        let dashboardCardDir = `${process.cwd()}/dashboard_cards/${name}`;
+        let dashboardCardDirectoryExists = fs.existsSync(dashboardCardDir);
+        if (dashboardCardDirectoryExists) {
+            try {
+                await fse.remove(dashboardCardDir);
+            } catch (e) {
+                console.error(e);
+                throw e;
+            }
+        } else {
+            return console.log('No related directory to delete for this dashboard-card, but it has been removed from the `manifest.json`');
+        }
     }
 };

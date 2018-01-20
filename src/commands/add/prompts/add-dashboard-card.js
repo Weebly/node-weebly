@@ -93,7 +93,7 @@ const questions = [
     */
 ];
 
-generatePath = (name) => {
+generateDashboardCardPath = (name) => {
     return 'dashboard_cards/' + name.toString().toLowerCase()
         .replace(/\s+/g, '-')           // Replace spaces with -
         .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
@@ -107,19 +107,21 @@ module.exports = async (manifestModel) => {
     let values = {
         name: answers.dashboard_card_name,
         version: answers.dashboard_card_version,
-        icon: generatePath(answers.dashboard_card_name),
+        path: generateDashboardCardPath(answers.dashboard_card_name),
         "default": []
     };
-
-    values.icon += '/icon.svg';
 
     if ('Yes' === answers.has_dashboard_card_link) {
         values.link = answers.dashboard_card_link;
     }
 
-    let iconPath;
     if ('Yes' === answers.has_dashboard_card_icon) {
-        iconPath = answers.dashboard_card_icon_path;
+        try {
+            await manifestModel.addDashboardCard(values, answers.dashboard_card_icon_path);
+            manifestModel.toFile();
+        } catch (e) {
+            writer.error(e);
+        }
     }
 
 
@@ -132,7 +134,7 @@ module.exports = async (manifestModel) => {
     */
 
     try {
-        await manifestModel.addDashboardCard(values, iconPath);
+        await manifestModel.addDashboardCard(values);
 
         manifestModel.toFile();
     } catch (e) {

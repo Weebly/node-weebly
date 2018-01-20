@@ -16,7 +16,7 @@ async function deleteElement(manifest, name) {
         }]);
 
         if (confirmed.confirmed) {
-            manifest.deleteElement(name);            
+            await manifest.deleteElementByName(name);
         }
     } catch (e) {
         writer.error(e);
@@ -36,7 +36,7 @@ async function deleteDashboardCard(manifest, name) {
         }]);
 
         if (confirmed.confirmed) {
-            manifest.deleteDashboardCard(name);            
+            await manifest.deleteDashboardCardByName(name);
         }
     } catch (e) {
         writer.error(e);
