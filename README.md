@@ -31,8 +31,9 @@ You will need:
 1. Install the Weebly CLI: `npm i -g weebly`
 2. View list of commands with help: `weebly -h` -OR- `weebly --help`
 3. Initialize a new Weebly App: `weebly init`
+4. Change your working directory into the newly created Weebly App Directory `cd <YOUR APP DIR NAME>`
 
-## Commands
+## Usage 
 
 * `init`
 * `list`
@@ -47,5 +48,19 @@ You will need:
 
 ## Contributing
 
+Please see the full [CONTRIBUTING](CONTRIBUTING.md) to learn how to:
+
+* Submit new issues
+* Engage on existing issues
+* Contribute source code
+
 ## LICENSE
 Please see the full [LICENSE](LICENSE) file for complete information.
+
+## Questions?
+If you have any questions or feature requests pertaining to Weebly or this developer tool, please consider asking in either:
+
+* [Weebly Developer Community](https://community.weebly.com/t5/Developers/ct-p/Developers)
+* [Issue Tracker](https://github.com/Weebly/node-weebly/issues)
+
+For discretionary developer support issues, please contact us at <dev-support@weebly.com>, and we'll be happy to lend a hand!

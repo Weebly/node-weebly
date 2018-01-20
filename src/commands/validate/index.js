@@ -14,7 +14,7 @@ module.exports = {
     command(program) {
         program
             .command('validate [pathTomManifestJSON]')
-            .description('Validate your `manifest.json` file, w/o path argument expects `manifest.json` in PWD.')
+            .description('Validate your `manifest.json` file, expects `manifest.json` in current working directory.')
             .action(async (pathToManifestJSON = './manifest.json') => {
                 try {
                     await manifestModel.fromFile(pathToManifestJSON);

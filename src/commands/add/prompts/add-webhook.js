@@ -40,7 +40,7 @@ const questions = [
             "store.coupon.update",
             "store.coupon.use"
         ]
-    },
+    }
 ];
 
 module.exports = async (manifestModel) => {
