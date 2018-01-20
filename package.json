@@ -1,6 +1,6 @@
 {
   "name": "node-weebly",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Weebly Platform Developer command line interface tool used for creating apps to be published on Weebly's App Center",
   "homepage": "https://github.com/weebly/node-weebly",
   "bugs": "https://github.com/weebly/node-weebly/issues",
