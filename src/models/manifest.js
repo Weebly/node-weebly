@@ -44,9 +44,9 @@ module.exports = {
     async build(values) {
         this.data.manifest = "1";
         _.merge(this.data, _.pick(values, [
-            'client_id', 
-            'version', 
-            'manage_app_url', 
+            'client_id',
+            'version',
+            'manage_app_url',
             'scopes',
             'callback_url'
         ]));
@@ -71,6 +71,10 @@ module.exports = {
         let elementDirectoryExists = await fs.existsSync(directory);
         if (!elementDirectoryExists) {
             await fs.mkdirSync(directory);
+            await fs.mkdirSync(`${directory}/css`);
+            await fs.mkdirSync(`${directory}/html`);
+            await fs.mkdirSync(`${directory}/js`);
+            await fs.mkdirSync(`${directory}/assets`);
         }
     },
     async createDashboardCardDirectory(directory) {

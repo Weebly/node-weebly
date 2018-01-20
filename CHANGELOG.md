@@ -1,5 +1,9 @@
 CHANGELOG
 ---------
+- **1.1.0** - 2018-01-
+  - Fix Issue #14 - Stub out element type's expected child directory structure
+- **1.0.1** - 2018-01-19
+  - Cleanup README
 - **1.0.0** - 2018-01-19
   - Add basic `manifest.json` validators
   - Add `add dashboard-card`, `add webhook`, `delete dashboard-card`, `delete element`, and `delete webhook` commands
