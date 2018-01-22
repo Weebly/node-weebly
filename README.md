@@ -1,4 +1,6 @@
-# Node Weebly CLI
+# (Beta) Node Weebly CLI
+
+This repository is currently in beta testing and development.
 
 Command Line Interface (CLI) utility for helping Weebly Developers build apps quicker and easier for App Center and with fewer issues.
 
