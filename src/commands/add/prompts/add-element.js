@@ -86,10 +86,12 @@ module.exports = async (manifestModel) => {
         name: answers.element_name,
         path: generateElementPath(answers.element_name),
         version: answers.element_version,
-        config: {
-            autopop: answers.settings_dialog_immediate === 'Yes'
-        },
-        properties: settings
+        settings: {
+            config: {
+                autopop: answers.settings_dialog_immediate === 'Yes'
+            },
+            properties: settings
+        }
     };
 
     if (externalSettings.create_external_setting === 'Yes') {
