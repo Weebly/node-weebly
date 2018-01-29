@@ -71,7 +71,7 @@
       "type": ["string", "null"],
       "title": "Your app's Client ID",
       "description": "The OAuth2 `client_id` as provided by the Weebly Developer Admin, note that `client_id` === `app_id`",
-      "pattern": "^[0-9]{10}$",
+      "pattern": "^[0-9]{5,10}$",
       "default": "",
       "examples": [
         "1919192384"
