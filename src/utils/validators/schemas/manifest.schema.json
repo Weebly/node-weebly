@@ -58,7 +58,7 @@
       }
     },
     "locale": {
-      "type": ["string", "null"],
+      "type": ["object", "string", "null"],
       "title": "Locale schema",
       "description": "Localization information about this app.",
       "pattern": "^[a-zA-Z]{2}-[a-zA-Z]{2}$",
