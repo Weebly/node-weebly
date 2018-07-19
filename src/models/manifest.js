@@ -2,6 +2,7 @@ const _ = require('lodash');
 const fs = require('fs');
 const fse = require('fs-extra');
 const jsonfile = require('jsonfile');
+const path = require('path');
 
 // CONSTANTS
 // TODO: Implement these later to prevent bugs
@@ -91,16 +92,21 @@ module.exports = {
     },
 
     async moveIcon(iconPath, directory) {
-        if (!String.isString(iconPath) || !iconPath.endsWith('.svg')) {
-            throw 'ERROR: Icon must be an SVG.';
-        }
+        if(null === iconPath) {
+            iconPath = `${path.dirname(require.main.filename)}/src/icons/elementIcon.png`;
+            await fs.copyFileSync(iconPath, directory + '/icon.svg');
+        } else {
+            if (!_.isString(iconPath) || !iconPath.endsWith('.svg')) {
+                throw 'ERROR: Icon must be an SVG.';
+            }
 
-        let iconExists = await fs.existsSync(iconPath);
-        if (!iconExists) {
-            throw 'ERROR: Icon does not exist at the given path.';
-        }
+            let iconExists = await fs.existsSync(iconPath);
+            if (!iconExists) {
+                throw 'ERROR: Icon does not exist at the given path.';
+            }
 
-        await fs.copyFileSync(iconPath, directory + '/icon.svg');
+            await fs.copyFileSync(iconPath, directory + '/icon.svg');
+        }
     },
     async addElement(values, iconPath) {
         if (!_.isArray(this.data.elements)) {
@@ -110,6 +116,8 @@ module.exports = {
         await this.createElementDirectory(values.path);
         if (_.isString(iconPath)) {
             await this.moveIcon(iconPath, values.path);
+        } else {
+            await this.moveIcon(null, values.path);
         }
 
         this.data.elements.push(values);
