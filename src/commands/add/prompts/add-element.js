@@ -1,4 +1,6 @@
-const { prompt } = require('inquirer');
+const inquirer = require('inquirer');
+inquirer.registerPrompt('fuzzypath', require('inquirer-fuzzy-path'));
+//const { prompt } = require('inquirer');
 const _ = require('lodash');
 const writer = require('../../../utils/writer');
 
@@ -37,8 +39,10 @@ const questions = [
         }
     },
     {
-        type: 'input',
+        type: 'fuzzypath',
         name: 'icon_path',
+        default: 'icon.svg',
+        rootPath: '../',
         message: 'Enter a path to a local directory where the icon is stored',
         when: (answers) => answers.has_element_icon === 'Yes',
         validate: value => iconValidator(value)
@@ -68,7 +72,7 @@ generateElementPath = (name) => {
 }
 
 module.exports = async (manifestModel) => {
-    let answers = await prompt(questions);
+    let answers = await inquirer.prompt(questions);
     let settings;
 
     if (answers.element_native_settings === 'Yes') {
