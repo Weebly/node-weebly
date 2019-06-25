@@ -73,9 +73,7 @@ const questions = [
             'read:store-catalog',
             'write:store-catalog',
             'read:store-orders',
-            'write:store-orders',
-            'read:membership',
-            'write:membership'
+            'write:store-orders'
         ],
         when: answers => 'Yes' === answers.has_oauth
     },
